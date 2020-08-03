@@ -7,11 +7,13 @@
  */
 
 import React from 'react';
+import { connect } from 'react-redux';
 import {
   SafeAreaView,
   StyleSheet,
   ScrollView,
   View,
+  Button,
   Text,
   StatusBar,
 } from 'react-native';
@@ -22,9 +24,14 @@ import {
   Colors,
   DebugInstructions,
   ReloadInstructions,
-} from 'react-native/Libraries/NewAppScreen';
+} from 'react-native/Libraries/NewAppScreen'; 
 
-const App: () => React$Node = () => {
+import { addRace } from './redux/actions/races';
+
+const App: () => React$Node = ({races, addRace}) => {
+  function placeSubmitHandler(){
+    addRace(111);
+}
   return (
     <>
       <StatusBar barStyle="dark-content" />
@@ -40,7 +47,10 @@ const App: () => React$Node = () => {
           )}
           <View style={styles.body}>
             <View style={styles.sectionContainer}>
-              <Text style={styles.sectionTitle}>Step One</Text>
+            <Button title = 'Add' 
+          onPress = { placeSubmitHandler }
+        />
+              <Text style={styles.sectionTitle}>Step One {races.length}</Text>
               <Text style={styles.sectionDescription}>
                 Edit <Text style={styles.highlight}>App.js</Text> to change this
                 screen and then come back to see your edits.
@@ -111,4 +121,18 @@ const styles = StyleSheet.create({
   },
 });
 
-export default App;
+const mapStateToProps = state => {
+  return {
+    races: state.races.races
+  }
+}
+
+const mapDispatchToProps = dispatch => {
+  return {
+    addRace: (name) => {
+      dispatch(addRace(name))
+    }
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(App)
