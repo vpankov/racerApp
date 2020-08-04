@@ -1,7 +1,7 @@
 import {connect} from 'react-redux';
 
 import RacerDetails from './index.js';
-import {setLoaderVisibility} from '../../redux/actions/popups.js';
+import {setLoaderVisibility} from 'src/redux/actions/popups.js';
 
 const mapDispatchToProps = (dispatch) => {
   return {
