@@ -30,12 +30,8 @@ export default function RacersScreen({ navigation,  setLoaderVisibility}){
         
         getRacers(nextPage).then((response) => response.json())
             .then((json) => {
-                console.log(json.MRData);
-
                 setRacersList(racersList.concat(json.MRData.DriverTable.Drivers));
 
-                console.log(json.MRData.total, nextPage * config.PAGINATION_SIZE)
-                
                 if(json.MRData.total > nextPage * config.PAGINATION_SIZE){
                     setNextPage(nextPage + 1);
                 } else {

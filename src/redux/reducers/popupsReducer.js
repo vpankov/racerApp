@@ -5,7 +5,6 @@ const initialState = {
 };
 
 const popupsReducer = (state = initialState, action) => {
-  console.log(action);
   switch(action.type) {
     case SET_LOADER_VISIBILITY:
       return {

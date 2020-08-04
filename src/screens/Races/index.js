@@ -30,12 +30,9 @@ export default function RacesScreen({ navigation,  setLoaderVisibility, route}){
         
         getRaces(id, nextPage).then((response) => response.json())
             .then((json) => {
-                console.log(json.MRData);
 
                 setRacesList(racesList.concat(json.MRData.RaceTable.Races));
 
-                console.log(json.MRData.total, nextPage * config.PAGINATION_SIZE)
-                
                 if(json.MRData.total > nextPage * config.PAGINATION_SIZE){
                     setNextPage(nextPage + 1);
                 } else {
