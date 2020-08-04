@@ -4,8 +4,7 @@ import {View, Text, TouchableOpacity, Linking} from 'react-native';
 import styles from './styles';
 
 const RacesItem = ({data}) => (
-  <TouchableOpacity
-    onPress={() => Linking.openURL(data.url)}>
+  <TouchableOpacity onPress={() => Linking.openURL(data.url)}>
     <View style={styles.listItem}>
       <View style={{...styles.column}}>
         <Text style={styles.listItem__name}>{data.raceName}</Text>

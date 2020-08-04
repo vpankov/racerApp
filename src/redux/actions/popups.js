@@ -1,8 +1,8 @@
-import { SET_LOADER_VISIBILITY } from './types';
+import {SET_LOADER_VISIBILITY} from './types';
 
-export const setLoaderVisibility = flag => {
+export const setLoaderVisibility = (flag) => {
   return {
     type: SET_LOADER_VISIBILITY,
-    payload: flag
-  }
-}
+    payload: flag,
+  };
+};

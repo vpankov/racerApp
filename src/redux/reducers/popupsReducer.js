@@ -1,19 +1,19 @@
-import { SET_LOADER_VISIBILITY } from '../actions/types';
+import {SET_LOADER_VISIBILITY} from '../actions/types';
 
 const initialState = {
-  isLoaderVisible: false
+  isLoaderVisible: false,
 };
 
 const popupsReducer = (state = initialState, action) => {
-  switch(action.type) {
+  switch (action.type) {
     case SET_LOADER_VISIBILITY:
       return {
         ...state,
-        isLoaderVisible: action.payload
+        isLoaderVisible: action.payload,
       };
     default:
       return state;
   }
-}
+};
 
 export default popupsReducer;

@@ -69,7 +69,11 @@ export default function RacerDetailsScreen({
             onPress={() => Linking.openURL(racerData.url)}
           />
           <Separator />
-          <Button style={styles.button} title={'Races'} onPress={() => navigation.navigate('Races', { id: id })}/>
+          <Button
+            style={styles.button}
+            title={'Races'}
+            onPress={() => navigation.navigate('Races', {id: id})}
+          />
         </View>
       </View>
     </View>
