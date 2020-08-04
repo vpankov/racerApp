@@ -5,23 +5,31 @@ import {
 const styles = StyleSheet.create({
     listItem: {
         flexDirection:"row", 
-        justifyContent:"space-between", 
-        paddingTop:5, 
-        paddingBottom:5
+        justifyContent:"space-between",
+        alignItems: "center",
+        paddingTop:20, 
+        paddingBottom:20,
+        paddingLeft: 10,
+        paddingRight: 10,
+        backgroundColor: "#FFFFFF",
+        borderBottomColor: "#d1d7dc",
+        borderBottomWidth: 1
     },
     column:{
         paddingLeft:5, 
         paddingRight:5, 
-        fontSize:15
     },
-    column_name:{
-        flex: 2
-    },
-    column_nationality:{
-        flex: 1
+    listItem__name:{
+        fontWeight: "bold",
+        fontSize: 17,
+        marginBottom: 5
     },
     column_birthday:{
-        width:100
+        alignItems: "flex-start"
+    },
+    listItem__birthdayLabel:{
+        fontWeight: "bold",
+        marginBottom: 5
     }
   });
 

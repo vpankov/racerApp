@@ -14,9 +14,14 @@ import { getRacers } from 'src/library/api/races'
 
 const Item = ({ data, navigation }) => (
     <View style={styles.listItem}>
-        <Text style={{...styles.column, ...styles.column_name}}>{`${data.givenName} ${data.familyName}`}</Text>
-        <Text style={{...styles.column, ...styles.column_birthday}}>{data.dateOfBirth}</Text>
-        <Text style={{...styles.column, ...styles.column_nationality}}>{data.nationality}</Text>
+        <View style={{...styles.column}}>
+            <Text style={styles.listItem__name}>{`${data.givenName} ${data.familyName}`}</Text>
+            <Text style={styles.listItem__nationality}>{data.nationality}</Text>
+        </View>
+        <View  style={{...styles.column, ...styles.column_birthday}}>
+            <Text style={styles.listItem__birthdayLabel}>Birthday</Text>
+            <Text>{data.dateOfBirth}</Text>
+        </View>
         {/* <TouchableOpacity onPress={() => navigation.navigate('SeasonDetails', { year: data.season })}>
             <Text style={{fontSize:20}}>{data.season}</Text>
         </TouchableOpacity> */}
@@ -50,7 +55,7 @@ export default function RacersScreen({ navigation }){
             <FlatList
                 data={racersList}
                 renderItem={renderItem}
-                style={{paddingLeft: 20, paddingRight: 20, paddingTop: 20, paddingBottom: 20}}
+                style={{paddingTop: 20, paddingBottom: 20}}
                 keyExtractor={item => item.driverId}
             />
             {/* <Button
