@@ -1,1 +1,1 @@
-export const ADD_RACE = 'ADD_RACE'
+export const SET_LOADER_VISIBILITY = 'SET_LOADER_VISIBILITY'

@@ -1,69 +1,69 @@
 import React, {useEffect, useState} from 'react';
 import {
-    Button,
     View,
-    Text,
     FlatList,
-    Linking,
-    TouchableOpacity
   } from 'react-native';
 
 import styles from './styles'
 
+import config from 'src/config.js'
+
+import RacersItem from './components/RacersItem'
+
 import { getRacers } from 'src/library/api/races' 
 
-const Item = ({ data, navigation }) => (
-    <View style={styles.listItem}>
-        <View style={{...styles.column}}>
-            <Text style={styles.listItem__name}>{`${data.givenName} ${data.familyName}`}</Text>
-            <Text style={styles.listItem__nationality}>{data.nationality}</Text>
-        </View>
-        <View  style={{...styles.column, ...styles.column_birthday}}>
-            <Text style={styles.listItem__birthdayLabel}>Birthday</Text>
-            <Text>{data.dateOfBirth}</Text>
-        </View>
-        {/* <TouchableOpacity onPress={() => navigation.navigate('SeasonDetails', { year: data.season })}>
-            <Text style={{fontSize:20}}>{data.season}</Text>
-        </TouchableOpacity> */}
-{/* 
-        <TouchableOpacity onPress={() => Linking.openURL(data.url)}>
-            <Text>Wiki</Text>
-        </TouchableOpacity> */}
-    </View>
-  );
-
-export default function RacersScreen({ navigation }){
-    const renderItem = ({ item }) => (
-        <Item data={item} navigation={navigation} />
-      );
-
+export default function RacersScreen({ navigation,  setLoaderVisibility}){
     const [racersList, setRacersList] = useState([]);
+    const [nextPage, setNextPage] = useState(0);
+    const [isLoading, setIsLoading] = useState(false);
 
     useEffect(() => {
-        getRacers().then((response) => response.json())
-        .then((json) => {
-            console.log(json.MRData.DriverTable.Drivers);
-          setRacersList(json.MRData.DriverTable.Drivers);
-        })
-        .catch((error) => {
-          console.error(error);
-        });
+        loadRacers()
     },[]);
+
+    function loadRacers(){
+        
+        if(nextPage === null || isLoading) return null;
+
+        setIsLoading(true);
+        setLoaderVisibility(true);
+        
+        getRacers(nextPage).then((response) => response.json())
+            .then((json) => {
+                console.log(json.MRData);
+
+                setRacersList(racersList.concat(json.MRData.DriverTable.Drivers));
+
+                console.log(json.MRData.total, nextPage * config.PAGINATION_SIZE)
+                
+                if(json.MRData.total > nextPage * config.PAGINATION_SIZE){
+                    setNextPage(nextPage + 1);
+                } else {
+                    setNextPage(null);
+                }
+                setIsLoading(false);
+                setLoaderVisibility(false);
+            })
+            .catch((error) => {
+                console.error(error);
+                setIsLoading(false);
+                setLoaderVisibility(false);
+        });
+
+    }
 
     return (
         <View>
             <FlatList
                 data={racersList}
-                renderItem={renderItem}
+                renderItem={({ item }) => (
+                    <RacersItem data={item} navigation={navigation} />
+                  )}
                 style={{paddingTop: 20, paddingBottom: 20}}
                 keyExtractor={item => item.driverId}
+                onEndReachedThreshold={0.5}
+                onEndReached={() => loadRacers()}
             />
-            {/* <Button
-                title="Go to racer details"
-                onPress={() =>
-                navigation.navigate('RacerDetails', { name: 'Jane' })
-                }
-            /> */}
         </View>
     );
   };

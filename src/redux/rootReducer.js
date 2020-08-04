@@ -1,7 +1,7 @@
 import {combineReducers} from 'redux';
 
-import racesReducer from './reducers/racesReducer';
+import popupsReducer from './reducers/popupsReducer';
 
 export default combineReducers({
-	races: racesReducer
+	popups: popupsReducer
 });
