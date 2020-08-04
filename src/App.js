@@ -2,7 +2,7 @@ import 'react-native-gesture-handler';
 import * as React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
-import SeasonsScreen from './screens/Seasons'
+import RacersScreen from './screens/Racers'
 import SeasonDetailsScreen from './screens/SeasonDetails'
 import RacerDetailsScreen from './screens/RacerDetails'
 
@@ -13,9 +13,9 @@ const App = () => {
     <NavigationContainer>
       <Stack.Navigator>
         <Stack.Screen
-          name="Seasons"
-          component={SeasonsScreen}
-          options={{ title: 'Seasons' }}
+          name="Racers"
+          component={RacersScreen}
+          options={{ title: 'Racers' }}
         />
         <Stack.Screen
           name="SeasonDetails"
